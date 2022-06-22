@@ -9,20 +9,40 @@ title.innerText = 'Etch a sketch!';
 
 title.classList.add('title');
 
-for (let i = 0; i < 16; i++) {
-  let newRow = document.createElement('div');
-  newRow.setAttribute('style',`grid-column-start:${i}; grid-column-end:${i+1};`);
 
-  for (let j = 0; j < 16; j++) {
+createGrid(16);
+
+body.appendChild(title);
+
+
+
+
+
+
+
+
+
+
+function createGrid(n)
+{
+for (let i = 0; i < n; i++) {
+  let newRow = document.createElement('div');
+  newRow.setAttribute('style', `grid-column-start:${i}; grid-column-end:${i + 1};`);
+
+  newRow.classList.add('newRow');
+
+  for (let j = 0; j < n; j++) {
     let cell = document.createElement('div');
     cell.classList.add('cell');
     newRow.appendChild(cell);
     container.appendChild(newRow);
   }
-
+}
 }
 
-body.appendChild(title);
+
+
+
 
 
 
