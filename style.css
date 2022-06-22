@@ -1,9 +1,3 @@
-.title {
-    margin-top: 50px;
-    color: black;
-    font-family: 'Permanent Marker', cursive;
-    font-size: 70px;
-}
 
 body {
     display: flex;
@@ -12,18 +6,3 @@ body {
     align-items: center;
 }
 
-#container {
-    display: flex;
-    width: 100px;
-    height: 100px;
-    background-color: white;
-}
-
-.cell {
-
-    border: 1px solid gray;
-    min-width: 10px;
-    min-height: 20px;
-    display: inline-block;
-
-}
