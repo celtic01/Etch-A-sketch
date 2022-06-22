@@ -3,6 +3,7 @@ body {
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
+    background-color: #ffebb3;
 }
 
 .title {
@@ -25,6 +26,13 @@ body {
 
     width: 31.25px;
     height: 31.25px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .button-paper {
