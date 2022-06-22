@@ -1,30 +1,26 @@
 const body = document.querySelector('body');
 const container = document.getElementById('grid-container');
 const title = document.createElement('div');
-
-
-body.style.backgroundColor = '#ffebb3';
-
-title.innerText = 'Etch a sketch!';
-
-title.classList.add('title');
+const buttons = document.querySelector('.buttons');
+const clear = document.createElement('button');
 
 createGrid(16);
 
-body.appendChild(title);
-
 const allCells = container.querySelectorAll('.cell');
-
-console.log(allCells);
-
 allCells.forEach(cell => {cell.addEventListener('mouseover', (event) =>{event.target.style.backgroundColor = 'black';})})
 
-  
+body.style.backgroundColor = '#ffebb3';
+title.innerText = 'Etch a sketch!';
+title.classList.add('title');
+body.appendChild(title);
 
-function changeColor()
-{
-  this.setAttribute('style','background-color: black')
-}
+clear.innerText = 'Clear';
+clear.classList.add('button-paper');
+
+clear.addEventListener('click', () => allCells.forEach(cell => cell.style.backgroundColor = 'white'))
+
+buttons.appendChild(clear);
+
 
 function createGrid(n) {
   for (let i = 0; i < n; i++) {
@@ -41,11 +37,6 @@ function createGrid(n) {
   }
 }
 
-function addEventListenerList(list, event, fn) {
-  for (var i = 0, len = list.length; i < len; i++) {
-      list[i].addEventListener(event, fn, false);
-  }
-}
 
 
 
