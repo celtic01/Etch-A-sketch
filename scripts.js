@@ -3,17 +3,26 @@ const container = document.getElementById('grid-container');
 const title = document.createElement('div');
 const buttons = document.querySelector('.buttons');
 const clear = document.createElement('button');
+let slider = document.getElementById('myRange');
+let output = document.getElementById('output');
 
-//create grid
-createGrid(16);
+
+createClearButton();
+
+createAndUpdateSlider();
 
 createTitle();
-createClearButton();
 
 
 
 
 function createGrid(n) {
+  //if there are cells, delete them and create grid
+  // if there are not cells, just create the grid
+  if(container.hasChildNodes())
+  {
+    container.innerHTML ='';
+  }
   let sizeOfCell = 500/n;
   for (let i = 0; i < n; i++) {
     let newRow = document.createElement('div');
@@ -41,12 +50,25 @@ title.classList.add('title');
 body.appendChild(title);
 }
 
-function createClearButton(){
+function createClearButton()
+{
   const allCells = container.querySelectorAll('.cell');
-  clear.innerText = 'Clear';
-clear.classList.add('button-paper');
-clear.addEventListener('click', () => allCells.forEach(cell => cell.style.backgroundColor = 'white'))
-buttons.appendChild(clear);
+  clear.classList.add('button-paper');
+  clear.addEventListener('click', () => {container.innerHTML = ''; createGrid(slider.value)});
+  clear.innerText='clear';
+  buttons.appendChild(clear);
+  
+}
+
+function createAndUpdateSlider()
+{
+  createGrid(slider.value);
+  output.innerHTML = slider.value + "x" + slider.value;
+
+slider.oninput = function () {
+  createGrid(this.value);
+  output.innerHTML = this.value + "x" + this.value;
+}
 }
 
 
