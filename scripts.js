@@ -14,6 +14,7 @@ createClearButton();
 
 
 function createGrid(n) {
+  let sizeOfCell = 500/n;
   for (let i = 0; i < n; i++) {
     let newRow = document.createElement('div');
 
@@ -23,6 +24,7 @@ function createGrid(n) {
     for (let j = 0; j < n; j++) {
       let cell = document.createElement('div');
       cell.classList.add('cell');
+      cell.setAttribute('style',`width:${sizeOfCell}px;height:${sizeOfCell}px;`);
       newRow.appendChild(cell);
       container.appendChild(newRow);
     }
