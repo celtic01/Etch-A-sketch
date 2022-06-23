@@ -8,6 +8,7 @@ let slider = document.getElementById('myRange');
 let output = document.getElementById('output');
 const container = document.getElementById('grid-container');
 
+let allCells;
 let color = 'black';
 
 createRgbButton();
@@ -42,7 +43,7 @@ function createGrid(n) {
       container.appendChild(newRow);
     }
   }
-  const allCells = container.querySelectorAll('.cell');
+  allCells = container.querySelectorAll('.cell');
 
   if (color == 'random') {
     allCells.forEach(cell => { cell.addEventListener('mouseover', (event) => { event.target.style.backgroundColor = `${random_rgba()}`; }) })
@@ -58,7 +59,7 @@ function createTitle() {
   title.classList.add('title');
   body.appendChild(title);
 }
-
+//TODO remove :active
 function createClearButton() {
   const allCells = container.querySelectorAll('.cell');
   clear.classList.add('button-6');
