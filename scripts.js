@@ -8,8 +8,9 @@ let slider = document.getElementById('myRange');
 let output = document.getElementById('output');
 const container = document.getElementById('grid-container');
 
-let allCells;
-let color = 'black';
+let allCells;       //variable for all the cells of the grid
+let color = 'black';//default
+
 
 createRgbButton();
 
@@ -44,7 +45,7 @@ function createGrid(n) {
     }
   }
   allCells = container.querySelectorAll('.cell');
-
+  
   if (color == 'random') {
     allCells.forEach(cell => { cell.addEventListener('mouseover', (event) => { event.target.style.backgroundColor = `${random_rgba()}`; }) })
   }
@@ -59,7 +60,6 @@ function createTitle() {
   title.classList.add('title');
   body.appendChild(title);
 }
-//TODO remove :active
 
 function createClearButton() {
   const allCells = container.querySelectorAll('.cell');
@@ -67,23 +67,23 @@ function createClearButton() {
   clear.addEventListener('click', () => { container.innerHTML = ''; createGrid(slider.value) });
   clear.innerText = 'clear';
   buttons.appendChild(clear);
-
 }
+
 function createRgbButton() {
-  rgb.classList.add('button-6');
+  rgb.classList.add('clear');
   rgb.style.marginRight = '50px';
   rgb.addEventListener('click', () => {
-    color = 'random'; allCells.forEach(cell => { cell.addEventListener('mouseover', (event) => { event.target.style.backgroundColor = `${random_rgba()}`; }) })
+    allCells.forEach(cell => { cell.addEventListener('mouseover', (event) => { event.target.style.backgroundColor = `${random_rgba()}`; }) })
   })
   rgb.innerText = 'RGB';
   buttons.appendChild(rgb);
 }
 
 function createBlackButton() {
-  black.classList.add('button-6');
+  black.classList.add('clear');
   black.style.marginLeft = '50px';
   black.addEventListener('click', () => {
-    color = 'black'; allCells.forEach(cell => { cell.addEventListener('mouseover', (event) => { event.target.style.backgroundColor = `${color}`; }) })
+    allCells.forEach(cell => { cell.addEventListener('mouseover', (event) => { event.target.style.backgroundColor = `${color}`; }) })
   })
   black.innerText = 'black';
   buttons.appendChild(black);
@@ -102,6 +102,7 @@ function random_rgba() {
   var o = Math.round, r = Math.random, s = 255;
   return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
 }
+
 
 
 
