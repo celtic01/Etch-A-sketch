@@ -60,6 +60,7 @@ function createTitle() {
   body.appendChild(title);
 }
 //TODO remove :active
+
 function createClearButton() {
   const allCells = container.querySelectorAll('.cell');
   clear.classList.add('button-6');
@@ -70,16 +71,20 @@ function createClearButton() {
 function createRgbButton() {
   rgb.classList.add('button-6');
   rgb.style.marginRight = '50px';
-  rgb.addEventListener('click', () => {color = 'random'; createGrid(slider.value) })
+  rgb.addEventListener('click', () => {
+    color = 'random'; allCells.forEach(cell => { cell.addEventListener('mouseover', (event) => { event.target.style.backgroundColor = `${random_rgba()}`; }) })
+  })
   rgb.innerText = 'RGB';
   buttons.appendChild(rgb);
 }
 
 function createBlackButton() {
-black.classList.add('button-6');
-black.style.marginLeft = '50px';
-black.addEventListener('click', () => {color = 'black'; createGrid(slider.value)})
-black.innerText = 'black';
+  black.classList.add('button-6');
+  black.style.marginLeft = '50px';
+  black.addEventListener('click', () => {
+    color = 'black'; allCells.forEach(cell => { cell.addEventListener('mouseover', (event) => { event.target.style.backgroundColor = `${color}`; }) })
+  })
+  black.innerText = 'black';
   buttons.appendChild(black);
 }
 
@@ -94,7 +99,7 @@ function createAndUpdateSlider() {
 
 function random_rgba() {
   var o = Math.round, r = Math.random, s = 255;
-  return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+  return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
 }
 
 
