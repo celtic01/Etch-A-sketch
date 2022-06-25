@@ -34,7 +34,7 @@ p {
     align-items: center;
 }
 
-.button-6 {
+.button-6, .clear{
   align-items: center;
   background-color: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -69,11 +69,12 @@ p {
   color: rgba(0, 0, 0, 0.65);
 }
 
-.button-6:hover {
+.button-6:hover,.clear {
   transform: translateY(-1px);
 }
 
-.button-6:active {
+.button-6:active,
+.clear:active {
   background-color: #F0F0F1;
   border-color: rgba(0, 0, 0, 0.15);
   box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;

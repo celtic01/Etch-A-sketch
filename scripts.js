@@ -63,10 +63,11 @@ function createTitle() {
 
 function createClearButton() {
   const allCells = container.querySelectorAll('.cell');
-  clear.classList.add('button-6');
+  clear.classList.add('clear');
   clear.addEventListener('click', () => { container.innerHTML = ''; createGrid(slider.value) });
   clear.innerText = 'clear';
   buttons.appendChild(clear);
+
 }
 function createRgbButton() {
   rgb.classList.add('button-6');
