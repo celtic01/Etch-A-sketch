@@ -3,38 +3,30 @@ const buttons = document.querySelector('.buttons');
 const title = document.createElement('div');
 const clear = document.createElement('button');
 const rgb = document.createElement('button');
-const black = document.createElement('button');
+const colorPicker = document.createElement('input');
 let slider = document.getElementById('myRange');
 let output = document.getElementById('output');
 const container = document.getElementById('grid-container');
 
-let allCells;       //variable for all the cells of the grid
-let color = 'black';//default
+let allCells;
+let color = 'black';
 
+let isMouseDown = false;
 
 createRgbButton();
-
 createClearButton();
-
-createBlackButton();
-
+createColorPickerButton();
 createAndUpdateSlider();
-
 createTitle();
 
 function createGrid(n) {
-  //if there are cells, delete them and create grid
-  // if there are not cells, just create the grid
   if (container.hasChildNodes()) {
     container.innerHTML = '';
   }
   let sizeOfCell = 500 / n;
   for (let i = 0; i < n; i++) {
-
     let newRow = document.createElement('div');
-
     newRow.setAttribute('style', `grid-column-start:${i}; grid-column-end:${i + 1};`);
-    newRow.classList.add('newRow');
 
     for (let j = 0; j < n; j++) {
       let cell = document.createElement('div');
@@ -45,14 +37,12 @@ function createGrid(n) {
     }
   }
   allCells = container.querySelectorAll('.cell');
-  
-  if (color == 'random') {
-    allCells.forEach(cell => { cell.addEventListener('mouseover', (event) => { event.target.style.backgroundColor = `${random_rgba()}`; }) })
-  }
-  else {
-    allCells.forEach(cell => { cell.addEventListener('mouseover', (event) => { event.target.style.backgroundColor = `${color}`; }) })
-  }
-
+  allCells.forEach(cell => {
+    cell.addEventListener('mousedown', onMouseDown);
+    cell.addEventListener('mouseup', onMouseUp);
+    cell.addEventListener('mouseover', onMouseOver);
+  });
+  container.addEventListener('mouseleave', onMouseLeave);
 }
 
 function createTitle() {
@@ -62,31 +52,31 @@ function createTitle() {
 }
 
 function createClearButton() {
-  const allCells = container.querySelectorAll('.cell');
-  clear.classList.add('clear');
+  clear.classList.add('button-select');
   clear.addEventListener('click', () => { container.innerHTML = ''; createGrid(slider.value) });
   clear.innerText = 'clear';
   buttons.appendChild(clear);
 }
 
 function createRgbButton() {
-  rgb.classList.add('clear');
+  rgb.classList.add('button-select');
   rgb.style.marginRight = '50px';
   rgb.addEventListener('click', () => {
-    allCells.forEach(cell => { cell.addEventListener('mouseover', (event) => { event.target.style.backgroundColor = `${random_rgba()}`; }) })
-  })
+    color = 'random';
+  });
   rgb.innerText = 'RGB';
   buttons.appendChild(rgb);
 }
 
-function createBlackButton() {
-  black.classList.add('clear');
-  black.style.marginLeft = '50px';
-  black.addEventListener('click', () => {
-    allCells.forEach(cell => { cell.addEventListener('mouseover', (event) => { event.target.style.backgroundColor = `${color}`; }) })
-  })
-  black.innerText = 'black';
-  buttons.appendChild(black);
+function createColorPickerButton() {
+  colorPicker.setAttribute('type', 'color');
+  colorPicker.setAttribute('value', 'black');
+  colorPicker.style.marginLeft = '50px';
+  colorPicker.classList.add('colorp-select');
+  colorPicker.addEventListener('change', () => {
+    color = colorPicker.value;
+  }, false);
+  buttons.appendChild(colorPicker);
 }
 
 function createAndUpdateSlider() {
@@ -103,13 +93,22 @@ function random_rgba() {
   return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
 }
 
+function onMouseDown(event) {
+  isMouseDown = true;
+  event.target.style.backgroundColor = color === 'random' ? random_rgba() : color;
+}
+
+function onMouseOver(event) {
+  if (isMouseDown) {
+    event.target.style.backgroundColor = color === 'random' ? random_rgba() : color;
+  }
+}
+
+function onMouseUp(event) {
+  isMouseDown = false;
+}
 
 
-
-
-
-
-
-
-
-
+function onMouseLeave(event) {
+  isMouseDown = false;
+}
