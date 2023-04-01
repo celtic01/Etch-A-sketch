@@ -41,6 +41,7 @@ function createGrid(n) {
     cell.addEventListener('mousedown', onMouseDown);
     cell.addEventListener('mouseup', onMouseUp);
     cell.addEventListener('mouseover', onMouseOver);
+    cell.addEventListener('dragstart', onDragStart);
   });
   container.addEventListener('mouseleave', onMouseLeave);
 }
@@ -108,7 +109,10 @@ function onMouseUp(event) {
   isMouseDown = false;
 }
 
-
 function onMouseLeave(event) {
   isMouseDown = false;
+}
+
+function onDragStart(event) {
+  event.preventDefault(); // Prevent default drag behavior
 }
